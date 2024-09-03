@@ -1,8 +1,10 @@
-package se331.lab.entity;
+package se331.lab.rest.entity;
 
 import lombok.Builder;
 import lombok.Data;
 
+@Data
+@Builder
 public class Event {
     Long id;
     String category;
