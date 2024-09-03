@@ -1,6 +1,8 @@
 package se331.lab.rest.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import se331.lab.rest.entity.Event;
 
 import jakarta.annotation.PostConstruct;
@@ -35,5 +37,32 @@ public class EventController {
                 .petAllowed(true)
                 .organizer("Fern Pollin")
                 .build());
+        eventList.add(Event.builder()
+                .id(841L)
+                .category("sustainability")
+                .title("Beach Cleanup")
+                .description("Help pick up trash along the shore.")
+                .location("Playa Del Carmen")
+                .date("July 22, 2022")
+                .time("11:00")
+                .petAllowed(false)
+                .organizer("Carey Wales")
+                .build());
+        eventList.add(Event.builder()
+                .id(841L)
+                .category("sustainability")
+                .title("Park Reforestation")
+                .description("Join us in planting trees in the local park.")
+                .location("Central Park")
+                .date("August 15, 2022")
+                .time("09:00")
+                .petAllowed(true)
+                .organizer("Jordan Smith")
+                .build());
+    }
+    @GetMapping("events")
+    public ResponseEntity<?> getEventLists() {
+        return ResponseEntity.ok(eventList);
     }
 }
+
