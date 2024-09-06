@@ -24,7 +24,40 @@ public class EventDaolmpl {
                     .date("January 28, 2022")
                     .time("12:00")
                     .petAllowed(true)
-                    .organizer("Kat Laydee")
+                    .organizer("kat Laydee")
+                    .build());
+            eventList.add(Event.builder()
+                    .id(456L)
+                    .category("food")
+                    .title("Community Gardening")
+                    .description("Join us as we tend to the community edible plants.")
+                    .location("Flora City")
+                    .date("March 14, 2022")
+                    .time("10:00")
+                    .petAllowed(true)
+                    .organizer("Fern Pollin")
+                    .build());
+            eventList.add(Event.builder()
+                    .id(841L)
+                    .category("sustainability")
+                    .title("Beach Cleanup")
+                    .description("Help pick up trash along the shore.")
+                    .location("Playa Del Carmen")
+                    .date("July 22, 2022")
+                    .time("11:00")
+                    .petAllowed(false)
+                    .organizer("Carey Wales")
+                    .build());
+            eventList.add(Event.builder()
+                    .id(841L)
+                    .category("sustainability")
+                    .title("Park Reforestation")
+                    .description("Join us in planting trees in the local park.")
+                    .location("Central Park")
+                    .date("August 15, 2022")
+                    .time("09:00")
+                    .petAllowed(true)
+                    .organizer("Jordan Smith")
                     .build());
         }
 
@@ -37,24 +70,13 @@ public class EventDaolmpl {
         public List<Event> getEvents(Integer pageSize, Integer page) {
             pageSize = pageSize == null ? eventList.size() : pageSize;
             page = page == null ? 1 : page;
-            Integer firstIndex = (page - 1) * pageSize;
-            List<Event> output = new ArrayList<>();
-            for (int i = firstIndex; i < firstIndex + pageSize; i++) {
-                output.add(eventList.get(i));
-            }
-            return output;
+            int firstIndex = (page - 1) * pageSize;
+            return eventList.subList(firstIndex, firstIndex + pageSize);
         }
 
         @Override
         public Event getEvent(Long id) {
-            Event output = null;
-            for (Event event : eventList) {
-                if (event.getId().equals(id)) {
-                    output = event;
-                    break;
-                }
-            }
-            return output;
+            return eventList.stream().filter(e -> e.getId().equals(id)).findFirst().orElse(null);
         }
     }
 }
